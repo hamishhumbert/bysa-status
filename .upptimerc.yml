@@ -1,31 +1,64 @@
-# Change these first
-owner: upptime # Your GitHub organization or username, where this repository lives
-repo: upptime # The name of this repository
+owner: hamishhumbert
+repo: bysa-status
+user-agent: hamishhumbert
+
+# Keep short incidents in the permanent incident history.
+skipDeleteIssues: true
+
+# This public repository contains no secrets or private endpoints.
+secrets: []
+
+assignees:
+  - hamishhumbert
 
 sites:
-  - name: Google
-    url: https://www.google.com
-  - name: Wikipedia
-    url: https://en.wikipedia.org
-  - name: Hacker News
-    url: https://news.ycombinator.com
-  - name: Secret Site
-    url: $SECRET_SITE
+  - name: BYSA Staging Web
+    slug: bysa-staging-web
+    url: https://bysa-staging-385106564279.australia-southeast1.run.app
+    expectedStatusCodes:
+      - 200
+    maxResponseTime: 30000
+    __dangerous__body_down_if_text_missing: "An agent-operated resale desk"
+    tags:
+      - priority-p3
+      - staging
+
+  - name: BYSA Staging Liveness
+    slug: bysa-staging-liveness
+    url: https://bysa-staging-385106564279.australia-southeast1.run.app/livez
+    expectedStatusCodes:
+      - 200
+    maxResponseTime: 30000
+    __dangerous__body_down_if_text_missing: "ok"
+    tags:
+      - priority-p3
+      - staging
+
+  - name: BYSA Staging Readiness
+    slug: bysa-staging-readiness
+    url: https://bysa-staging-385106564279.australia-southeast1.run.app/readyz
+    expectedStatusCodes:
+      - 200
+    maxResponseTime: 30000
+    __dangerous__body_down_if_text_missing: '"ready":true'
+    tags:
+      - priority-p3
+      - staging
 
 status-website:
-  # Add your custom domain name, or remove the `cname` line if you don't have a domain
-  # Uncomment the `baseUrl` line if you don't have a custom domain and add your repo name there
-  cname: demo.upptime.js.org
-  # baseUrl: /your-repo-name
-  logoUrl: https://raw.githubusercontent.com/upptime/upptime.js.org/master/static/img/icon.svg
-  name: Upptime
-  introTitle: "**Upptime** is the open-source uptime monitor and status page, powered entirely by GitHub."
-  introMessage: This is a sample status page which uses **real-time** data from our [GitHub repository](https://github.com/upptime/upptime). No server required — just GitHub Actions, Issues, and Pages. [**Get your own for free**](https://github.com/upptime/upptime)
+  baseUrl: /bysa-status
+  name: BYSA Status
+  theme: night
+  introTitle: "**BYSA service status**"
+  introMessage: >-
+    Founder-stage monitoring for BYSA's public staging service. Checks may be
+    delayed by GitHub Actions and are not guaranteed P1 paging. See the
+    [severity policy](https://github.com/hamishhumbert/bysa-status/blob/master/SEVERITY.md)
+    for the current scope.
   navbar:
     - title: Status
-      href: /
-    - title: GitHub
-      href: https://github.com/$OWNER/$REPO
-
-# Upptime also supports notifications, assigning issues, and more
-# See https://upptime.js.org/docs/configuration
+      href: /bysa-status/
+    - title: Incidents
+      href: https://github.com/hamishhumbert/bysa-status/issues?q=is%3Aissue+label%3Astatus
+    - title: Severity policy
+      href: https://github.com/hamishhumbert/bysa-status/blob/master/SEVERITY.md
