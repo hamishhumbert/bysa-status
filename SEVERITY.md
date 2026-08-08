@@ -27,3 +27,10 @@ a guaranteed 24/7 paging system.
 
 P1 and P2 monitors must not be added until the corresponding production
 workflow exists, is externally verified, and has a tested response owner.
+
+## Maintenance policy
+
+Automatic Upptime template rewriting is disabled. GitHub's repository token is
+intentionally not allowed to rewrite workflow files, and BYSA Status does not
+store a broad personal access token. Review and apply upstream workflow updates
+manually so each workflow change remains visible in Git history.
