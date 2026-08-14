@@ -12,6 +12,10 @@ Upptime's generated workflow refresh is deliberately manual. Before running
 restore full-SHA pins, rerun `node scripts/verify-workflow-security.mjs`, and
 merge only after the workflow-security check passes.
 
+Dependabot checks pinned GitHub Actions weekly and groups compatible updates in
+a reviewable pull request. Keep SHA enforcement enabled; never replace a pin
+with the mutable tag shown in its maintenance comment.
+
 The monitoring workflows need repository contents write access because Upptime
 commits status data. `Uptime CI` additionally needs issue write access to manage
 incident issues, and `Setup CI` needs Actions write access to dispatch graph
