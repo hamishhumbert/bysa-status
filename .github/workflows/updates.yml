@@ -16,11 +16,11 @@
 
 name: Updates CI
 on:
-  schedule:
-    - cron: "0 3 * * *"
-  repository_dispatch:
-    types: [updates]
+  # Template updates are manual so generated workflows can be reviewed and
+  # re-pinned before they run with repository write access.
   workflow_dispatch:
+permissions:
+  contents: write
 concurrency:
   group: ${{ github.repository }}-${{ github.head_ref || github.ref_name }}-upptime
   cancel-in-progress: false
@@ -30,11 +30,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
           ref: ${{ github.head_ref || github.ref_name }}
           token: ${{ secrets.GH_PAT || github.token }}
       - name: Update code
-        uses: upptime/updates@master
+        uses: upptime/updates@9d745f46d553517d6fecf90fa41de1ba2f81e9fe # master, reviewed 2026-08-15
         env:
           GH_PAT: ${{ secrets.GH_PAT || github.token }}
